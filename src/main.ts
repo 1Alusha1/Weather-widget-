@@ -22,6 +22,9 @@ searchElement!.addEventListener("submit", async (e) => {
 });
 
 async function getCityWeather(cityName: string) {
+  const city: HTMLSpanElement | null = document.querySelector(".city-name");
+  city!.innerHTML = `Celected: ${cityName}`;
+
   const apiKey = "b990d220bbca1070ddbeadd51dcac407";
   const res = await fetch(
     `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${apiKey}`
@@ -71,7 +74,9 @@ function render(list: any, parent: HTMLDivElement) {
             ${convertTemp(list[0].day.main.temp)}°C
           </span>
           <span>
-            ${list[0].night.weather.main} ${convertTemp(list[0].night.main.temp)}
+            ${list[0].night.weather.main} ${convertTemp(
+      list[0].night.main.temp
+    )}
           </span>
         </div>
         <div class="city">
@@ -163,3 +168,15 @@ function parseData(data: {
   }
   return result;
 }
+
+(async function preLoad() {
+  const weatherList = await getCityWeather("Kyiv");
+
+  if (weatherList) {
+    const parsedData: IParsedData = parseData(weatherList);
+
+    if (parsedData) {
+      render(objectToArray(parsedData), weatherElemet!);
+    }
+  }
+})();
