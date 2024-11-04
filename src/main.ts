@@ -79,7 +79,7 @@ function render(list: any, parent: HTMLDivElement) {
           <span>${list[0].country}</span>
         </div>
         <img 
-          src=./public/images/${icon[String(list[0].night.weather.main)]}
+          src=./images/${icon[String(list[0].night.weather.main)]}
           alt=${icon[String(list[0].night.weather.main)]} 
         />
       </div>`;
@@ -90,7 +90,7 @@ function render(list: any, parent: HTMLDivElement) {
       <li>
         <div class="day">${list[i].weekDay}</div>
           <img 
-            src=./public/images/${icon[String(list[i].night.weather.main)]} 
+            src=./images/${icon[String(list[i].night.weather.main)]} 
             alt=${icon[String(list[i].night.weather.main)]} 
           />
           <div class="info">Rain</div>
